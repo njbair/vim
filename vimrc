@@ -95,7 +95,9 @@ if has('autocmd')
 	augroup end
 endif
 
-" enable mouse
+" enable mouse in GUI Vim
+" disabled deliberately in non-GUI instances
+" due to a bug with gpm over SSH
 if has('gui_running')
 	set mouse=a
 else
