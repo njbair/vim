@@ -96,8 +96,8 @@ if has('autocmd')
 endif
 
 " enable mouse in GUI Vim
-" disabled deliberately in non-GUI instances
-" due to a bug with gpm over SSH
+" disabled deliberately in non-GUI instances due to a bug with gpm over SSH
+" (see http://www.linuxquestions.org/questions/slackware-14/vim-freeze-at-startup-when-in-ssh-session-856606/)
 if has('gui_running')
 	set mouse=a
 else
