@@ -104,6 +104,10 @@ else
 	set mouse=
 endif
 
+" update runtimepath variable to load plugins
+" from ~/.vim/bundle using pathogen
+call pathogen#infect()
+
 
 
 "
