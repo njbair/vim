@@ -17,7 +17,14 @@ set ruler          " always show cursor position in status bar
 set showcmd        " show commands while typing
 set number         " show line numbers
 set showtabline=0  " never show tab bar
-source ~/.vim/display
+
+" set font and colors
+if has('win32')
+	set gfn=Consolas:h11
+else
+	set gfn=Monaco\ 10
+endif
+colorscheme molokai
 
 
 
