@@ -20,9 +20,9 @@ set showtabline=0  " never show tab bar
 
 " set font and colors
 if has('win32')
-	set gfn=Consolas:h11
+	set guifont=Consolas:h11
 else
-	set gfn=Monaco\ 10
+	set guifont=Monaco\ 10
 endif
 colorscheme molokai
 
