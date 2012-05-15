@@ -111,6 +111,10 @@ else
 	set mouse=
 endif
 
+
+
+" needed for pathogen to function in jailed shell environments
+set shell=/bin/bash
 " update runtimepath variable to load plugins
 " from ~/.vim/bundle using pathogen
 " and refresh hepltags
