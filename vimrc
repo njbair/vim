@@ -13,10 +13,10 @@ set nocompatible
 "
 " =Display
 "
-set ruler          " always show cursor position in status bar
-set showcmd        " show commands while typing
-set number         " show line numbers
-set showtabline=0  " never show tab bar
+set ruler                  " always show cursor position in status bar
+set showcmd                " show commands while typing
+set number                 " show line numbers
+set showtabline=0          " never show tab bar
 
 " set font and colors
 if has('win32')
@@ -113,7 +113,9 @@ endif
 
 " update runtimepath variable to load plugins
 " from ~/.vim/bundle using pathogen
+" and refresh hepltags
 call pathogen#infect()
+call pathogen#helptags()
 
 
 
@@ -147,3 +149,7 @@ nnoremap <Leader>e :e <C-R>=expand('%:p:h') . '/'<CR>
 
 " expand \w to the specified path
 nnoremap <Leader>w :e ~/Projects/Web/
+
+" map \nt to open NERDTree and \nc to close it
+nnoremap <Leader>nt :NERDTree<CR>
+nnoremap <Leader>nc :NERDTreeClose<CR>
