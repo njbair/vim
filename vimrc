@@ -96,9 +96,11 @@ if has('autocmd')
 
 		" remember last known cursor position
 		au BufReadPost *
-		\ if line("'\"") > 1 && line("'\"") <= line("$") |
-			\ exec "normal! g`\"" |
-		\ endif
+					\ if line("'\"") > 1 && line("'\"") <= line("$") |
+					\ exec "normal! g`\"" |
+					\ endif
+
+		au BufEnter * lcd %:p:h
 	augroup end
 endif
 
@@ -154,6 +156,5 @@ nnoremap <Leader>e :e <C-R>=expand('%:p:h') . '/'<CR>
 " expand \w to the specified path
 nnoremap <Leader>w :e ~/Projects/Web/
 
-" map \nt to open NERDTree and \nc to close it
-nnoremap <Leader>nt :NERDTree<CR>
-nnoremap <Leader>nc :NERDTreeClose<CR>
+" map \nt to open/close NERDTree
+nnoremap <Leader>nt :NERDTreeToggle<CR>
