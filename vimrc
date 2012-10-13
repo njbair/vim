@@ -24,7 +24,7 @@ if has('win32')
 else
 	set guifont=Monaco\ 10
 endif
-colorscheme molokai
+colorscheme twilight
 
 
 
@@ -158,3 +158,7 @@ nnoremap <Leader>w :e ~/Projects/Web/
 
 " map \nt to open/close NERDTree
 nnoremap <Leader>nt :NERDTreeToggle<CR>
+
+" compile .less to .css
+"nnoremap ,m :w <BAR> !lessc % > %:t:r.css<CR><space>
+nnoremap ,m :w <BAR> !./compile<CR>
