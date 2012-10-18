@@ -104,14 +104,8 @@ if has('autocmd')
 	augroup end
 endif
 
-" enable mouse in GUI Vim
-" disabled deliberately in non-GUI instances due to a bug with gpm over SSH
-" (see http://www.linuxquestions.org/questions/slackware-14/vim-freeze-at-startup-when-in-ssh-session-856606/)
-if has('gui_running')
-	set mouse=a
-else
-	set mouse=
-endif
+" enable mouse
+set mouse=a
 
 
 
@@ -158,7 +152,3 @@ nnoremap <Leader>w :e ~/Projects/Web/
 
 " map \nt to open/close NERDTree
 nnoremap <Leader>nt :NERDTreeToggle<CR>
-
-" compile .less to .css
-"nnoremap ,m :w <BAR> !lessc % > %:t:r.css<CR><space>
-nnoremap ,m :w <BAR> !./compile<CR>
