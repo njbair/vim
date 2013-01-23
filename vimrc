@@ -5,6 +5,18 @@
 " http://nickbair.net
 "
 
+" needed for pathogen to function in jailed shell environments
+set shell=/bin/bash
+" load pathogen
+runtime bundle/vim-pathogen/autoload/pathogen.vim
+" update runtimepath variable to load plugins
+" from ~/.vim/bundle using pathogen
+" and refresh hepltags
+call pathogen#infect()
+call pathogen#helptags()
+
+
+
 " break Vi compatibility and set Vim defaults
 set nocompatible
 
@@ -24,7 +36,7 @@ if has('win32')
 else
 	set guifont=Monaco\ 10
 endif
-colorscheme twilight
+colorscheme molokai
 
 
 
@@ -106,16 +118,6 @@ endif
 
 " enable mouse
 set mouse=a
-
-
-
-" needed for pathogen to function in jailed shell environments
-set shell=/bin/bash
-" update runtimepath variable to load plugins
-" from ~/.vim/bundle using pathogen
-" and refresh hepltags
-call pathogen#infect()
-call pathogen#helptags()
 
 
 
