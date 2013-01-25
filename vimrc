@@ -28,7 +28,7 @@ set nocompatible
 set ruler                  " always show cursor position in status bar
 set showcmd                " show commands while typing
 set number                 " show line numbers
-set showtabline=0          " never show tab bar
+set showtabline=2          " always show tab bar
 
 " set font and colors
 if has('win32')
@@ -152,5 +152,13 @@ nnoremap <Leader>e :e <C-R>=expand('%:p:h') . '/'<CR>
 " expand \w to the specified path
 nnoremap <Leader>w :e ~/Projects/Web/
 
+" tab shortcuts
+nnoremap ,0 :tabfirst<CR>
+nnoremap ,l :tabnext<CR>
+nnoremap ,h :tabprevious<CR>
+nnoremap ,$ :tablast<CR>
+nnoremap ,x :tabclose<CR>
+nnoremap ,m :tabmove 
+
 " map \nt to open/close NERDTree
-nnoremap <Leader>nt :NERDTreeToggle<CR>
+nnoremap <Leader>nt :NERDTreeTabsToggle<CR>
