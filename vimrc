@@ -34,9 +34,12 @@ set showtabline=2          " always show tab bar
 if has('win32')
 	set guifont=Consolas:h11
 else
-	set guifont=Monaco\ 10
+	set guifont=Menlo\ 11
 endif
-colorscheme molokai
+
+set background=dark
+let g:solarized_termtrans=1
+colorscheme solarized
 
 
 
