@@ -42,4 +42,7 @@
 	url = https://github.com/jistr/vim-nerdtree-tabs.git
 [submodule "bundle/todo.txt-vim"]
 	path = bundle/todo.txt-vim
-	url = git://github.com/freitass/todo.txt-vim.git
+	url = https://github.com/freitass/todo.txt-vim.git
+[submodule "bundle/solarized"]
+	path = bundle/solarized
+	url = https://github.com/altercation/vim-colors-solarized.git
