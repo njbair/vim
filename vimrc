@@ -116,6 +116,9 @@ if has('autocmd')
 					\ endif
 
 		au BufEnter * lcd %:p:h
+
+		" misc. filetypes
+		au BufRead,BufNewFile *.tpl set filetype=php
 	augroup end
 endif
 
