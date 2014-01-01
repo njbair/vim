@@ -32,9 +32,9 @@ set showtabline=2          " always show tab bar
 
 " set font and colors
 if has('win32')
-	set guifont=Consolas:h11
+    set guifont=Consolas:h11
 else
-	set guifont=Menlo\ 11
+    set guifont=Menlo\ 11
 endif
 
 set background=dark
@@ -44,32 +44,39 @@ colorscheme solarized
 
 
 "
+" =Syntax Highlighting
+"
+" enable syntax highlighting in color terminals
+if &t_Co > 2 || has('gui_running')
+    syntax on
+endif
+
+
+
+"
 " =Formatting
 "
 " auto-indenting (based on filetype if available)
 if has('autocmd')
-	filetype plugin indent on
+    filetype plugin indent on
 else
-	set autoindent
+    set autoindent
 endif
 
-set textwidth=72           " line breaks at column 72
+set textwidth=80           " line breaks at column 80
 set formatoptions+=tcroql  " see :h fo and :h fo-table
 set linebreak              " only break lines at certain character types
 set nowrap                 " don't soft-wrap lines (it makes coding hard)
 set tabstop=4              " tab size for tab key
 set shiftwidth=4           " tab size for >> and << and autoindent
-set noexpandtab            " do NOT use spaces instead of tabs
+set expandtab              " use spaces instead of tabs
 
+highlight ColorColumn ctermbg=cyan
+call matchadd('ColorColumn', '\%81v', 100)
 
-
-"
-" =Syntax Highlighting
-"
-" enable syntax highlighting in color terminals
-if &t_Co > 2 || has('gui_running')
-	syntax on
-endif
+highlight SpecialKey ctermbg=none ctermfg=4
+exec "set listchars=tab:\uBB\u2014,nbsp:~,trail:\uB7"
+set list
 
 
 
@@ -79,6 +86,18 @@ endif
 set incsearch   " incremental searching (find as you type)
 set ignorecase  " case-insensitive searches
 set nohlsearch  " do not highlight search results
+
+function! HLNext (blinktime)
+    highlight WhiteOnRed ctermfg=white ctermbg=red
+    let [bufnum, lnum, col, off] = getpos('.')
+    let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+    let target_pat = '\c\%#'.@/
+    let ring = matchadd('WhiteOnRed', target_pat, 101)
+    redraw
+    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+    call matchdelete(ring)
+    redraw
+endfunction
 
 
 
@@ -104,22 +123,30 @@ set history=50
 set autowrite
 
 if has('autocmd')
-	" create & initialize new autocmd group 'misc'
-	augroup misc
-		" clear group
-		au!
+    " create & initialize new autocmd group 'misc'
+    augroup misc
+        " clear group
+        autocmd!
 
-		" remember last known cursor position
-		au BufReadPost *
-					\ if line("'\"") > 1 && line("'\"") <= line("$") |
-					\ exec "normal! g`\"" |
-					\ endif
+        " remember last known cursor position
+        autocmd BufReadPost *
+                    \ if line("'\"") > 1 && line("'\"") <= line("$") |
+                    \ exec "normal! g`\"" |
+                    \ endif
 
-		au BufEnter * lcd %:p:h
+        autocmd BufEnter * lcd %:p:h
 
-		" misc. filetypes
-		au BufRead,BufNewFile *.tpl set filetype=php
-	augroup end
+        " misc. filetypes
+        autocmd BufRead,BufNewFile *.tpl set filetype=php
+    augroup end
+
+    augroup NoSimultaneousEdits
+        autocmd!
+        autocmd SwapExists * let v:swapchoice = 'o'
+        autocmd SwapExists * echo 'Duplicate edit session (readonly)'
+        autocmd SwapExists * echohl None
+        autocmd SwapExists * sleep 2
+    augroup end
 endif
 
 " enable mouse
@@ -140,8 +167,8 @@ cabbr <expr> %% expand('%:p:h')
 "
 " diff the current buffer with the file from which it was loaded
 if !exists(":DiffOrig")
-	command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis |
-	wincmd p | diffthis
+    command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis |
+    wincmd p | diffthis
 endif
 
 
@@ -151,6 +178,9 @@ endif
 "
 " break undo on line breaks in insert mode
 inoremap <C-U> <C-G>u<C-U>
+
+" save keystrokes by remapping ; to :
+nnoremap ; :
 
 " expand \e to :e [current directory] in normal mode
 nnoremap <Leader>e :e <C-R>=expand('%:p:h') . '/'<CR>
@@ -164,7 +194,18 @@ nnoremap ,l :tabnext<CR>
 nnoremap ,h :tabprevious<CR>
 nnoremap ,$ :tablast<CR>
 nnoremap ,x :tabclose<CR>
-nnoremap ,m :tabmove 
+nnoremap ,m :tabmove
 
 " map \nt to open/close NERDTree
 nnoremap <Leader>nt :NERDTreeTabsToggle<CR>
+
+" highlight next search term for easy finding
+nnoremap <silent> n n:call HLNext(0.4)<cr>
+nnoremap <silent> N N:call HLNext(0.4)<cr>
+
+" keybindings for dragvisuals.vim
+vmap <expr> <LEFT> DVB_Drag('left')
+vmap <expr> <RIGHT> DVB_Drag('right')
+vmap <expr> <DOWN> DVB_Drag('down')
+vmap <expr> <UP> DVB_Drag('up')
+vmap <expr> D DVB_Duplicate()
