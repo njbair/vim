@@ -55,3 +55,9 @@
 [submodule "bundle/dragvisuals.vim"]
 	path = bundle/dragvisuals.vim
 	url = https://github.com/gavinbeatty/dragvisuals.vim.git
+[submodule "bundle/vim-vagrant"]
+	path = bundle/vim-vagrant
+	url = git://github.com/markcornick/vim-vagrant.git
+[submodule "bundle/vim-puppet"]
+	path = bundle/vim-puppet
+	url = git://github.com/rodjek/vim-puppet.git
