@@ -61,3 +61,6 @@
 [submodule "bundle/vim-puppet"]
 	path = bundle/vim-puppet
 	url = git://github.com/rodjek/vim-puppet.git
+[submodule "bundle/vim-nginx"]
+	path = bundle/vim-nginx
+	url = https://github.com/evanmiller/nginx-vim-syntax.git
